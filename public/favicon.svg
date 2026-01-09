@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Silver X favicon">
+  <defs>
+    <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="hsl(45 100% 60%)"/>
+      <stop offset="50%" stop-color="hsl(45 100% 50%)"/>
+      <stop offset="100%" stop-color="hsl(35 100% 45%)"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle (navy) -->
+  <rect width="256" height="256" rx="40" ry="40" fill="hsl(222 47% 5%)" />
+
+  <!-- X shape stroke with gradient and glow -->
+  <g transform="translate(0,0)" filter="url(#glow)">
+    <path d="M70 68 L186 188" stroke="url(#g)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <path d="M186 68 L70 188" stroke="url(#g)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  </g>
+
+  <!-- Center accent to sharpen the X -->
+  <circle cx="128" cy="128" r="6" fill="hsl(45 100% 60%)" />
+</svg>
