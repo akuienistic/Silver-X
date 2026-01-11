@@ -1,42 +1,45 @@
-import { motion } from 'framer-motion';
-import { Play, Youtube, ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Layout from '@/components/layout/Layout';
+import { motion } from "framer-motion";
+import { Play, Youtube, ExternalLink, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Layout from "@/components/layout/Layout";
+import { useState } from "react";
 
 const videos = [
   {
-    id: 'BXy4b00rgzs',
-    title: 'Silver X, Molten Rock - Kon Koc (Official Music Video)',
-    category: 'Music Video',
-    views: '13K views',
-    date: '2023',
+    id: "BXy4b00rgzs",
+    title: "Silver X, Molten Rock - Kon Koc (Official Music Video)",
+    category: "Music Video",
+    views: "13K views",
+    date: "2023",
   },
   {
-    id: 'Vr2pFeq6kH0',
-    title: 'Silver X - Time is Over (Official HD Video)',
-    category: 'Music Video',
-    views: '15K views',
-    date: '2020',
+    id: "Vr2pFeq6kH0",
+    title: "Silver X - Time is Over (Official HD Video)",
+    category: "Music Video",
+    views: "15K views",
+    date: "2020",
   },
   {
-    id: 'rQCGJIZe3ME',
-    title: 'Eyal Del - Dynamq & The Voices Of South Sudan ft. Silver X',
-    category: 'Music Video',
-    views: '500K+ views',
-    date: '2017',
+    id: "rQCGJIZe3ME",
+    title: "Eyal Del - Dynamq & The Voices Of South Sudan ft. Silver X",
+    category: "Music Video",
+    views: "500K+ views",
+    date: "2017",
   },
   {
-    id: '_8bNRt19s44',
-    title: 'Top 10 South Sudanese Songs - Silver X Featured',
-    category: 'Compilation',
-    views: '100K+ views',
-    date: '2023',
+    id: "_8bNRt19s44",
+    title: "Top 10 South Sudanese Songs - Silver X Featured",
+    category: "Compilation",
+    views: "100K+ views",
+    date: "2023",
   },
 ];
 
-const categories = ['All', 'Music Video', 'Live Performance', 'Behind The Scenes', 'Lyric Video'];
+const categories = ["All", "Music Video", "Live Performance", "Behind The Scenes", "Lyric Video"];
 
 const Videos = () => {
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -48,9 +51,7 @@ const Videos = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <p className="font-display text-sm uppercase tracking-[0.3em] text-primary mb-4">
-              Visual Stories
-            </p>
+            <p className="font-display text-sm uppercase tracking-[0.3em] text-primary mb-4">Visual Stories</p>
             <h1 className="font-display text-5xl md:text-6xl font-black mb-6">
               <span className="text-gradient-gold">Videos</span>
             </h1>
@@ -80,8 +81,8 @@ const Videos = () => {
                 transition={{ delay: index * 0.1 }}
                 className={`px-6 py-2 rounded-full font-display text-sm uppercase tracking-wider transition-all ${
                   index === 0
-                    ? 'bg-gradient-to-r from-yellow-500 to-amber-500 text-slate-900'
-                    : 'bg-secondary text-foreground hover:bg-secondary/80'
+                    ? "bg-gradient-to-r from-yellow-500 to-amber-500 text-slate-900"
+                    : "bg-secondary text-foreground hover:bg-secondary/80"
                 }`}
               >
                 {category}
@@ -103,6 +104,7 @@ const Videos = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="group cursor-pointer"
+                onClick={() => setSelectedVideo(video.id)}
               >
                 <div className="relative aspect-video rounded-xl overflow-hidden mb-4 bg-secondary">
                   {/* YouTube Thumbnail */}
@@ -114,11 +116,11 @@ const Videos = () => {
                       (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
                     }}
                   />
-                  
+
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
                   <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {/* Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 flex items-center justify-center shadow-yellow-500/30 shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
@@ -198,6 +200,45 @@ const Videos = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="relative w-full max-w-4xl bg-background rounded-xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-primary/20 hover:bg-primary/40 flex items-center justify-center transition-colors"
+              aria-label="Close video"
+            >
+              <X size={24} className="text-foreground" />
+            </button>
+
+            {/* Video Player */}
+            <div className="relative aspect-video bg-black">
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                title="Video Player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0"
+              />
+            </div>
+          </motion.div>
+        </div>
+      )}
     </Layout>
   );
 };

@@ -1,27 +1,30 @@
-import { motion } from 'framer-motion';
-import { Play, Youtube } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+import { Play, Youtube, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const videos = [
   {
-    id: 'BXy4b00rgzs',
-    title: 'Silver X, Molten Rock - Kon Koc',
-    views: '13K views',
+    id: "BXy4b00rgzs",
+    title: "Silver X, Molten Rock - Kon Koc",
+    views: "13K views",
   },
   {
-    id: 'Vr2pFeq6kH0',
-    title: 'Silver X - Time is Over',
-    views: '15K views',
+    id: "Vr2pFeq6kH0",
+    title: "Silver X - Time is Over",
+    views: "15K views",
   },
   {
-    id: 'rQCGJIZe3ME',
-    title: 'Eyal Del - ft. Silver X',
-    views: '500K+ views',
+    id: "rQCGJIZe3ME",
+    title: "Eyal Del - ft. Silver X",
+    views: "500K+ views",
   },
 ];
 
 const VideoSection = () => {
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
   return (
     <section className="section-padding bg-card">
       <div className="container-custom">
@@ -32,9 +35,7 @@ const VideoSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="font-display text-sm uppercase tracking-[0.3em] text-primary mb-4">
-            Watch Now
-          </p>
+          <p className="font-display text-sm uppercase tracking-[0.3em] text-primary mb-4">Watch Now</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold">
             Latest <span className="text-gradient-gold">Videos</span>
           </h2>
@@ -49,8 +50,9 @@ const VideoSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="group cursor-pointer"
+              onClick={() => setSelectedVideo(video.id)}
             >
-              <a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">
+              <div>
                 <div className="relative aspect-video rounded-xl overflow-hidden mb-4">
                   <img
                     src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
@@ -70,7 +72,7 @@ const VideoSection = () => {
                   {video.title}
                 </h3>
                 <p className="text-muted-foreground text-sm">{video.views}</p>
-              </a>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -93,6 +95,45 @@ const VideoSection = () => {
           </Button>
         </motion.div>
       </div>
+
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="relative w-full max-w-4xl bg-background rounded-xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-primary/20 hover:bg-primary/40 flex items-center justify-center transition-colors"
+              aria-label="Close video"
+            >
+              <X size={24} className="text-foreground" />
+            </button>
+
+            {/* Video Player */}
+            <div className="relative aspect-video bg-black">
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                title="Video Player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0"
+              />
+            </div>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 };
