@@ -5,11 +5,11 @@ import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 
 const socialLinks = [
-  { icon: Youtube, href: 'https://youtube.com/c/SilverXMusicMachine', label: 'YouTube', color: 'hover:text-red-500' },
-  { icon: Instagram, href: 'https://instagram.com/silverxmusic', label: 'Instagram', color: 'hover:text-pink-500' },
-  { icon: Facebook, href: 'https://facebook.com/silverxmusic', label: 'Facebook', color: 'hover:text-blue-500' },
-  { icon: Twitter, href: 'https://twitter.com/silverxmusic', label: 'Twitter', color: 'hover:text-sky-500' },
-  { icon: Music2, href: 'https://open.spotify.com/artist/silverx', label: 'Spotify', color: 'hover:text-green-500' },
+  { icon: Youtube, href: 'https://www.youtube.com/@SilverXMusicMachine', label: 'YouTube', color: 'hover:text-red-500' },
+  { icon: Instagram, href: 'https://www.instagram.com/silverxtra/', label: 'Instagram', color: 'hover:text-pink-500' },
+  { icon: Facebook, href: 'https://www.facebook.com/SilverXtraOfficial/', label: 'Facebook', color: 'hover:text-blue-500' },
+  { icon: Twitter, href: 'https://twitter.com/silverxtra', label: 'Twitter', color: 'hover:text-sky-500' },
+  { icon: Music2, href: 'https://open.spotify.com/artist/4W0kkRPNouPljglZsUhxsL', label: 'Spotify', color: 'hover:text-green-500' },
 ];
 
 const Contact = () => {

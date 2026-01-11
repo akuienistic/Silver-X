@@ -1,15 +1,27 @@
-import { Link } from 'react-router-dom';
-import { Instagram, Youtube, Facebook, Twitter, Music2, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { Instagram, Youtube, Facebook, Twitter, Music2, Mail, Phone, MapPin } from "lucide-react";
+import { useState } from "react";
 
 const socialLinks = [
-  { icon: Youtube, href: 'https://www.youtube.com/@SilverXMusicMachine', label: 'YouTube' },
-  { icon: Instagram, href: 'https://www.instagram.com/silverxtra/', label: 'Instagram' },
-  { icon: Facebook, href: 'https://www.facebook.com/SilverXtraOfficial/', label: 'Facebook' },
-  { icon: Twitter, href: 'https://twitter.com/silverxtra', label: 'Twitter' },
-  { icon: Music2, href: 'https://open.spotify.com/artist/4W0kkRPNouPljglZsUhxsL', label: 'Spotify' },
+  { icon: Youtube, href: "https://www.youtube.com/@SilverXMusicMachine", label: "YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/silverxtra/", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/SilverXtraOfficial/", label: "Facebook" },
+  { icon: Twitter, href: "https://twitter.com/silverxtra", label: "Twitter" },
+  { icon: Music2, href: "https://open.spotify.com/artist/4W0kkRPNouPljglZsUhxsL", label: "Spotify" },
 ];
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSubmitted(true);
+      setEmail("");
+      setTimeout(() => setSubmitted(false), 3000);
+    }
+  };
   return (
     <footer className="bg-card border-t border-border">
       <div className="container-custom section-padding">
@@ -40,10 +52,10 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-bold mb-6 text-foreground">Quick Links</h4>
             <ul className="space-y-3">
-              {['Home', 'About', 'Music', 'Videos', 'Contact'].map((link) => (
+              {["Home", "About", "Music", "Videos", "Contact"].map((link) => (
                 <li key={link}>
                   <Link
-                    to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
+                    to={link === "Home" ? "/" : `/${link.toLowerCase()}`}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link}
@@ -75,33 +87,34 @@ const Footer = () => {
           {/* Newsletter */}
           <div>
             <h4 className="font-display text-lg font-bold mb-6 text-foreground">Stay Updated</h4>
-            <p className="text-muted-foreground mb-4">
-              Subscribe for exclusive updates, new releases, and tour dates.
-            </p>
-            <form className="flex flex-col gap-3">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="px-4 py-3 bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <button
-                type="submit"
-                className="bg-gradient-gold text-primary-foreground font-display font-semibold py-3 rounded-md hover:opacity-90 transition-opacity"
-              >
-                Subscribe
-              </button>
-            </form>
+            <p className="text-muted-foreground mb-4">Subscribe for exclusive updates, new releases, and tour dates.</p>
+            {submitted ? (
+              <div className="text-primary text-sm font-semibold">✓ Thanks for subscribing!</div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email"
+                  className="px-4 py-3 bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="bg-gradient-gold text-primary-foreground font-display font-semibold py-3 rounded-md hover:opacity-90 transition-opacity"
+                >
+                  Subscribe
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Silver X. All rights reserved.
-          </p>
-          <p className="text-muted-foreground text-sm">
-            Holyland Music Empire (HLME) & International Records
-          </p>
+          <p className="text-muted-foreground text-sm">© {new Date().getFullYear()} Silver X. All rights reserved.</p>
+          <p className="text-muted-foreground text-sm">Holyland Music Empire (HLME) & International Records</p>
         </div>
       </div>
     </footer>

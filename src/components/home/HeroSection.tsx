@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Play, Music2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import heroImage from '@/assets/hero-silver-x.jpg';
+import heroImage from '@/assets/SilverX Hero.jpg';
 
 const HeroSection = () => {
   return (

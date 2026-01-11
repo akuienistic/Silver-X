@@ -1,28 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Silver X favicon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background with gradient -->
   <defs>
-    <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="hsl(45 100% 60%)"/>
-      <stop offset="50%" stop-color="hsl(45 100% 50%)"/>
-      <stop offset="100%" stop-color="hsl(35 100% 45%)"/>
+    <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8E8E8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B0B0B0;stop-opacity:1" />
     </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="b"/>
-      <feMerge>
-        <feMergeNode in="b"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
-
-  <!-- Background circle (navy) -->
-  <rect width="256" height="256" rx="40" ry="40" fill="hsl(222 47% 5%)" />
-
-  <!-- X shape stroke with gradient and glow -->
-  <g transform="translate(0,0)" filter="url(#glow)">
-    <path d="M70 68 L186 188" stroke="url(#g)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-    <path d="M186 68 L70 188" stroke="url(#g)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-  </g>
-
-  <!-- Center accent to sharpen the X -->
-  <circle cx="128" cy="128" r="6" fill="hsl(45 100% 60%)" />
+  
+  <!-- Navy background -->
+  <rect width="100" height="100" fill="#0F1419"/>
+  
+  <!-- Silver gradient circle background -->
+  <circle cx="50" cy="50" r="48" fill="url(#silverGradient)"/>
+  
+  <!-- SX text in navy -->
+  <text x="50" y="65" font-family="Montserrat, sans-serif" font-size="56" font-weight="900" text-anchor="middle" fill="#0F1419" letter-spacing="-2">SX</text>
 </svg>
