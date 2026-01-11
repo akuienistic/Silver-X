@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Award, Users, Music, Star } from 'lucide-react';
+import { Award, Users, Music, Star, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import studioImage from '@/assets/silver-x-studio.jpg';
@@ -82,7 +82,10 @@ const AboutPreview = () => {
             </div>
 
             <Button variant="outline-gold" size="lg" asChild>
-              <Link to="/about">Read Full Story</Link>
+              <Link to="/about">
+                <BookOpen size={20} />
+                Read Full Story
+              </Link>
             </Button>
           </motion.div>
         </div>

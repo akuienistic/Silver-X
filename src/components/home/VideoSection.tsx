@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Youtube, X } from "lucide-react";
+import { Play, Youtube, X, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -85,7 +85,10 @@ const VideoSection = () => {
           className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Button variant="gold" size="lg" asChild>
-            <Link to="/videos">View All Videos</Link>
+            <Link to="/videos">
+              <Video size={20} />
+              View All Videos
+            </Link>
           </Button>
           <Button variant="outline-gold" size="lg" asChild>
             <a href="https://www.youtube.com/@SilverXMusicMachine" target="_blank" rel="noopener noreferrer">

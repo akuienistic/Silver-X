@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Youtube, Facebook, Twitter, Music2, Mail, Phone, MapPin } from "lucide-react";
-import { useState } from "react";
+import { Instagram, Youtube, Facebook, Twitter, Music2, Mail, Phone, MapPin, Crown } from "lucide-react";
 
 const socialLinks = [
   { icon: Youtube, href: "https://www.youtube.com/@SilverXMusicMachine", label: "YouTube" },
@@ -11,17 +10,6 @@ const socialLinks = [
 ];
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-      setEmail("");
-      setTimeout(() => setSubmitted(false), 3000);
-    }
-  };
   return (
     <footer className="bg-card border-t border-border">
       <div className="container-custom section-padding">
@@ -84,37 +72,46 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Holyland Empire */}
           <div>
-            <h4 className="font-display text-lg font-bold mb-6 text-foreground">Stay Updated</h4>
-            <p className="text-muted-foreground mb-4">Subscribe for exclusive updates, new releases, and tour dates.</p>
-            {submitted ? (
-              <div className="text-primary text-sm font-semibold">✓ Thanks for subscribing!</div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  className="px-4 py-3 bg-secondary border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-gradient-gold text-primary-foreground font-display font-semibold py-3 rounded-md hover:opacity-90 transition-opacity"
-                >
-                  Subscribe
-                </button>
-              </form>
-            )}
+            <div className="flex items-center gap-2 mb-6">
+              <Crown size={20} className="text-primary" />
+              <h4 className="font-display text-lg font-bold text-foreground">Holyland Empire</h4>
+            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Holyland Music Empire (HLME) & International Records - Pioneering East African music on the global stage.
+            </p>
+            <div className="mt-4 pt-4 border-t border-border">
+              <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-2">CEO & Founder</p>
+              <p className="text-foreground font-display font-bold">Silver X</p>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">© {new Date().getFullYear()} Silver X. All rights reserved.</p>
-          <p className="text-muted-foreground text-sm">Holyland Music Empire (HLME) & International Records</p>
+        <div className="pt-8 border-t border-border">
+          <div className="flex flex-col gap-4 text-center">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <p className="text-muted-foreground text-sm">
+                © {new Date().getFullYear()} Silver X. All rights reserved.
+              </p>
+              <span className="hidden sm:inline text-muted-foreground">•</span>
+              <p className="text-muted-foreground text-sm">Holyland Music Empire (HLME) & International Records</p>
+            </div>
+            <div className="pt-4 border-t border-border/50">
+              <p className="text-muted-foreground text-sm">
+                Developed by{" "}
+                <a
+                  href="https://web.facebook.com/profile.php?id=61572703111798"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 transition-colors font-semibold"
+                >
+                  Simon Star Tech
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

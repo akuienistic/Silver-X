@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Home, User, Music2, Play, Mail, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Music', path: '/music' },
-  { name: 'Videos', path: '/videos' },
-  { name: 'Contact', path: '/contact' },
+  { name: "Home", path: "/", icon: Home },
+  { name: "About", path: "/about", icon: User },
+  { name: "Music", path: "/music", icon: Music2 },
+  { name: "Videos", path: "/videos", icon: Play },
+  { name: "Contact", path: "/contact", icon: Mail },
 ];
 
 const Header = () => {
@@ -21,8 +21,8 @@ const Header = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -32,15 +32,13 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
       <nav className="container-custom flex items-center justify-between h-20 px-4 md:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <span className="font-display text-2xl md:text-3xl font-black text-gradient-gold">
-            SILVER X
-          </span>
+          <span className="font-display text-2xl md:text-3xl font-black text-gradient-gold">SILVER X</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -50,7 +48,7 @@ const Header = () => {
               <Link
                 to={link.path}
                 className={`font-display text-sm uppercase tracking-widest transition-colors hover:text-primary ${
-                  location.pathname === link.path ? 'text-primary' : 'text-foreground/80'
+                  location.pathname === link.path ? "text-primary" : "text-foreground/80"
                 }`}
               >
                 {link.name}
@@ -62,7 +60,10 @@ const Header = () => {
         {/* CTA Button - Desktop */}
         <div className="hidden md:block">
           <Button variant="outline-gold" size="sm" asChild>
-            <Link to="/contact">Book Now</Link>
+            <Link to="/contact">
+              <BookOpen size={16} />
+              Book Now
+            </Link>
           </Button>
         </div>
 
@@ -81,39 +82,52 @@ const Header = () => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background/98 backdrop-blur-md border-t border-border"
           >
-            <ul className="flex flex-col py-6 px-4">
-              {navLinks.map((link, index) => (
-                <motion.li
-                  key={link.path}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    to={link.path}
-                    className={`block py-4 font-display text-lg uppercase tracking-widest transition-colors hover:text-primary ${
-                      location.pathname === link.path ? 'text-primary' : 'text-foreground/80'
-                    }`}
+            <div className="flex justify-end px-4 py-6">
+              <div className="w-1/2">
+                <ul className="flex flex-col gap-2">
+                  {navLinks.map((link, index) => {
+                    const Icon = link.icon;
+                    return (
+                      <motion.li
+                        key={link.path}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.08 }}
+                      >
+                        <Link
+                          to={link.path}
+                          className={`flex items-center gap-3 px-4 py-3 rounded-lg font-display text-sm uppercase tracking-widest transition-all duration-200 ${
+                            location.pathname === link.path
+                              ? "bg-primary/20 text-primary shadow-md"
+                              : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
+                          }`}
+                        >
+                          <Icon size={20} className="flex-shrink-0" />
+                          <span>{link.name}</span>
+                        </Link>
+                      </motion.li>
+                    );
+                  })}
+                  <motion.li
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navLinks.length * 0.08 }}
+                    className="pt-2"
                   >
-                    {link.name}
-                  </Link>
-                </motion.li>
-              ))}
-              <motion.li
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                className="pt-4"
-              >
-                <Button variant="gold" className="w-full" asChild>
-                  <Link to="/contact">Book Now</Link>
-                </Button>
-              </motion.li>
-            </ul>
+                    <Button variant="gold" className="w-full" asChild>
+                      <Link to="/contact">
+                        <BookOpen size={18} />
+                        Book Now
+                      </Link>
+                    </Button>
+                  </motion.li>
+                </ul>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

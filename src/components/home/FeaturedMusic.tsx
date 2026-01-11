@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, ExternalLink, X } from "lucide-react";
+import { Play, ExternalLink, X, Music2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -93,7 +93,10 @@ const FeaturedMusic = () => {
           className="text-center mt-12"
         >
           <Button variant="gold" size="lg" asChild>
-            <Link to="/music">View All Music</Link>
+            <Link to="/music">
+              <Music2 size={20} />
+              View All Music
+            </Link>
           </Button>
         </motion.div>
 
