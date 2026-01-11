@@ -3,7 +3,7 @@ import { Play, Music2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import heroImage from "@/assets/hero-silver-x.jpg";
+import heroImage from "@/assets/SilverX Hero.jpg";
 
 const HeroSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
